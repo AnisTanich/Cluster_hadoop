@@ -1,0 +1,26 @@
+---
+- name: Stop and disable UFW
+  systemd:
+    name: ufw
+    state: stopped
+    enabled: no
+
+- name: Stop and disable systemd-timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: stopped
+    enabled: no
+
+- name: Install NTP and NTPdate
+  apt:
+    name:
+      - ntp
+      - ntpdate
+    state: present
+
+- name: Start and enable NTP service
+  systemd:
+    name: ntp
+    state: started
+    enabled: yes
+

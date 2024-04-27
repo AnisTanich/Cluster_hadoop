@@ -1,0 +1,53 @@
+---
+- name: Déployer Hadoop Common Configuration
+  hosts: all
+  become: yes
+  roles:
+    - role: hadoop_common
+      vars:
+        ssh_setup_enabled: true
+        update_hosts_enabled: true
+        dl_hadoop: true
+        modif_bashrc: true
+        conf_java_home: true
+        deploy_site: true
+
+- name: Configurer les nœuds Master Hadoop
+  hosts: zookeeper
+  become: yes
+  roles:
+    - role: hadoop_config
+      vars:
+        conf_workers: true
+        dl_extract_zk: true
+        configure_zookeeper: true
+	basic_tools: true
+  tasks:
+    - name: Démarrer les daemons JournalNode et ZooKeeper Server
+      become: yes
+      block:
+        - name: Démarrer le daemon JournalNode
+          command: hdfs --daemon start journalnode
+        - name: Démarrer le ZooKeeper Server
+          command: zkServer.sh start
+        - name: Démarrer le NameNode
+          command: hdfs --daemon start namenode
+
+- name: Activer les DataNodes sur les nœuds Worker
+  hosts: slaves
+  become: yes
+  tasks:
+    - name: Démarrer les DataNodes
+      command: hdfs --daemon start datanode
+
+- name: Installation de ntp sur tous les noeuds
+  hosts: all
+  become: true
+  roles:
+    - ntp
+
+
+      
+
+
+

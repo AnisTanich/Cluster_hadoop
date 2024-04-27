@@ -1,0 +1,12 @@
+---
+- name: Synchronisation de temps sur tous les noeuds
+  hosts: all
+  become: yes
+  roles:
+    - role: systemd
+
+
+      
+
+
+

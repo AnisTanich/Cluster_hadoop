@@ -1,0 +1,17 @@
+[0;1;32m●[0m cloudera-scm-server.service - Cloudera CM Server Service
+   Loaded: loaded (/lib/systemd/system/cloudera-scm-server.service; enabled; vendor preset: enabled)
+   Active: [0;1;32mactive (running)[0m since Tue 2024-04-23 17:42:59 CEST; 1min 44s ago
+  Process: 8824 ExecStartPre=/opt/cloudera/cm/bin/cm-server-pre (code=exited, status=0/SUCCESS)
+ Main PID: 8826 (java)
+    Tasks: 28 (limit: 4915)
+   CGroup: /system.slice/cloudera-scm-server.service
+           └─8826 /usr/lib/jvm/java-11-openjdk-amd64/bin/java -cp .:/usr/share/java/mysql-connector-java.jar:/usr/share/java/oracle-connector-java.jar:/usr/share/java/postgresql-connector-java.jar:lib/* -server -Dlog4j.configuration=file:/etc/cloudera-scm-server/log4j.properties -Dfile.encoding=UTF-8 -Dcmf.root.logger=INFO,LOGFILE -Dcmf.log.dir=/var/log/cloudera-scm-server -Dcmf.log.file=cloudera-scm-server.log -Dcmf.jetty.threshhold=WARN -Dcmf.schema.dir=/opt/cloudera/cm/schema -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Dpython.home=/opt/cloudera/cm/python -XX:+HeapDumpOnOutOfMemoryError -Xmx4G -XX:MaxPermSize=256m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/sun.nio.cs=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.lang.reflect=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens java.base/java.util.regex=ALL-UNNAMED --add-opens java.base/java.util.zip=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --add-opens java.base/java.net=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED --add-opens java.base/java.security=ALL-UNNAMED --add-opens java.base/java.text=ALL-UNNAMED --add-opens java.base/javax.crypto=ALL-UNNAMED -Djdk.tls.client.protocols="TLSv1,TLSv1.1,TLSv1.2" -XX:OnOutOfMemoryError={CMF_PATH}/bin/killparent-cm-server com.cloudera.server.cmf.Main
+
+avril 23 17:42:59 edge1 systemd[1]: [0;1;39m[0;1;31m[0;1;39mcloudera-scm-server.service: Failed with result 'exit-code'.[0m
+avril 23 17:42:59 edge1 systemd[1]: Stopped Cloudera CM Server Service.
+avril 23 17:42:59 edge1 systemd[1]: Starting Cloudera CM Server Service...
+avril 23 17:42:59 edge1 systemd[1]: Started Cloudera CM Server Service.
+avril 23 17:43:00 edge1 cm-server[8826]: JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+avril 23 17:43:01 edge1 cm-server[8826]: Disabling support for TLSv1.3 in CM server due to bug JDK-8213202 in JDK 11
+avril 23 17:43:02 edge1 cm-server[8826]: OpenJDK 64-Bit Server VM warning: Ignoring option MaxPermSize; support was removed in 8.0
+avril 23 17:43:19 edge1 cm-server[8826]: ERROR StatusLogger No log4j2 configuration file found. Using default configuration: logging only errors to the console. Set system property 'org.apache.logging.log4j.simplelog.StatusLogger.level' to TRACE to show Log4j2 internal initialization logging.

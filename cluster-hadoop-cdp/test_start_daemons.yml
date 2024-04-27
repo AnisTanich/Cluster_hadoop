@@ -1,0 +1,19 @@
+---
+- name: Démarrer les daemons sur les nœuds ZooKeeper
+  hosts: zookeeper
+  become: true
+  tasks:
+    - name: Démarrer le daemon JournalNode
+      command: hdfs --daemon start journalnode
+    - name: Démarrer le ZooKeeper Server
+      command: zkServer.sh start
+    - name: Démarrer le NameNode
+      command: hdfs --daemon start namenode
+
+- name: Démarrer les DataNodes sur les nœuds Worker
+  hosts: slaves
+  become: true
+  tasks:
+    - name: Démarrer les DataNodes
+      command: hdfs --daemon start datanode
+

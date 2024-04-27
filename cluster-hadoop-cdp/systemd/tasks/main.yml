@@ -1,0 +1,10 @@
+---
+# Puisque systemd-timesyncd est déjà installé par défaut, nous n'avons pas besoin d'une tâche d'installation
+
+- name: Enable and start systemd-timesyncd service
+  systemd:
+    name: systemd-timesyncd
+    enabled: yes
+    state: started
+  become: true
+

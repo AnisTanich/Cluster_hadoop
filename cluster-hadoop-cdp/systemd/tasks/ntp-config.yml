@@ -1,0 +1,25 @@
+---
+- name: Install NTP
+  apt:
+    name: ntp
+    state: present
+  become: true
+
+- name: Configure NTP
+  template:
+    src: ntp.conf.j2
+    dest: /etc/ntp.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart ntp
+
+- name: Enable and start NTP service
+  systemd:
+    name: ntp
+    enabled: yes
+    state: started
+  become: true
+
+
+

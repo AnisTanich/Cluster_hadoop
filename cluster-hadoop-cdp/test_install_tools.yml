@@ -1,0 +1,25 @@
+---
+- name: Install basic development tools
+  hosts: zookeeper
+  become: true
+  tasks:
+    - name: Install various development tools
+      apt:
+        name:
+          - vim
+          - tmux
+          - git
+          - curl
+          - wget
+          - build-essential
+          - make
+          - xz-utils
+          - file
+          - liblzma-dev
+          - patch
+          - zlib1g-dev
+          - g++
+          - gcc
+        state: present
+        update_cache: yes
+
